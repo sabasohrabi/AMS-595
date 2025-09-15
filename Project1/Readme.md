@@ -24,3 +24,7 @@ z≈1.96) to quantify uncertainty. The while-loop continues until the CI’s rel
 N
 ​	
   decay of Monte Carlo uncertainty without ever using the true value of π.
+
+  task3
+
+I solved the problem by treating π-estimation as a Monte Carlo “dartboard” experiment and using a confidence-interval stopping rule instead of a fixed sample size. The function repeatedly draws uniform points in the unit square, counts the share inside the inscribed quarter-circle, and maps that hit rate to an estimate of π. After each batch it computes a 95% confidence interval for the estimate and stops as soon as the relative half-width is below a user chosen threshold achieving the requested precision without ever using the true value of π.
