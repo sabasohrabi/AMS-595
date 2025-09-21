@@ -1,30 +1,13 @@
-Project1 description:
+# Project1 Description
 
-task1 
+## Task 1
 
-The script drops uniformly random points in the unit square, counts how many fall inside the inscribed quarter circle, and maps that hit rate to a π estimate via the circle-to-square area ratio. It tracks the running estimate, absolute error (vs MATLAB’s pi), and cumulative runtime. As samples grow, the estimate stabilizes near π, the error shrinks at roughly the Monte Carlo rate 
-1
-/
-N
-​	
- , and runtime increases about linearly with the number of points.
+This script estimates π using a Monte Carlo approach. It generates uniformly random points within the unit square and counts how many fall inside the inscribed quarter circle. The ratio of points inside the circle to the total number of points is used to estimate π, based on the area relationship between the circle and the square. The script tracks the running estimate, the absolute error compared to MATLAB’s value of π, and the cumulative runtime. As the number of samples increases, the estimate converges toward π, the error decreases at a rate proportional to 1/N, and the runtime grows approximately linearly with the number of points.
 
- task2
+## Task 2
 
- Each batch treats “inside vs. outside” as a binomial trial, converts the inside proportion 
-p
-^
-  to 
-π
-^
-  via the area ratio, and forms a 95% normal-approximation confidence interval (using 
-z≈1.96) to quantify uncertainty. The while-loop continues until the CI’s relative half-width drops below the user’s target, then reports the final estimate, CI width, and total samples. This CI-width stopping rule is principled and leverages the 
-1
-/
-N
-​	
-  decay of Monte Carlo uncertainty without ever using the true value of π.
+Each batch of points is treated as a series of binomial trials (inside vs. outside the quarter circle). The proportion of points inside is converted to an estimate of π using the area ratio. A 95% confidence interval for the estimate is calculated using the normal approximation (z ≈ 1.96). The process continues in a while-loop until the relative half-width of the confidence interval falls below a user-specified threshold. At that point, the script reports the final estimate, the width of the confidence interval, and the total number of samples used. This stopping rule is based on the confidence interval width and takes advantage of the 1/N decay in Monte Carlo uncertainty, without ever referencing the true value of π.
 
-  task3
+## Task 3
 
-I solved the problem by treating π-estimation as a Monte Carlo “dartboard” experiment and using a confidence-interval stopping rule instead of a fixed sample size. The function repeatedly draws uniform points in the unit square, counts the share inside the inscribed quarter-circle, and maps that hit rate to an estimate of π. After each batch it computes a 95% confidence interval for the estimate and stops as soon as the relative half-width is below a user chosen threshold achieving the requested precision without ever using the true value of π.
+The problem is approached by modeling π-estimation as a Monte Carlo “dartboard” experiment, using a confidence interval-based stopping rule rather than a fixed sample size. The function repeatedly generates random points in the unit square, counts the proportion inside the quarter circle, and estimates π accordingly. After each batch, it computes a 95% confidence interval for the estimate and stops once the relative half-width meets the user’s desired precision, achieving the target accuracy without using the true value of π.
